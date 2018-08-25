@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<style>
+*{
+	margin:0;
+	padding:0;	
+	text-align:center;
+}
+#inner{
+	width:300px;
+	height:300px;
+	border:1px solid red;
+	margin: 30px auto;
+}
+#show{
+	width:100px;
+	height: 30px;
+	background: blue;
+	margin:0px auto;
+}
+</style>
+</head>
+<body>
+<div id="inner"></div>
+<a id="show">ShowMORE</a>
+<script type="text/javascript">
+var info=document.getElementById("inner");
+var show=document.getElementById("show");
+show.addEventListener("click",function(){
+var script=document.createElement("script");//创建一个script标签
+		script.src="http://127.0.0.1:9292/loadmore?callback=appendNews";
+    //跨域请求地址
+		document.head.appendChild(script);//放到页面头部
+		document.head.removeChild(script);//为保持页面干净整洁，移除。
+//appendNews(["提前在页面声明一个函数","原始数据上包裹这个函数名","原始数据上包裹这个函数名"]);
+})
+function appendNews(news){
+	var html = '';
+      for( var i=0; i<news.length; i++){
+        html += '<li>' + news[i] + '</li>';
+      }
+      console.log(html)
+    info.innerHTML = html;
+}
+</script>
+</body>
+</html>
